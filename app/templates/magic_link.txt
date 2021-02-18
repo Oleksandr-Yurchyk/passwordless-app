@@ -1,0 +1,9 @@
+Dear {{ email }},
+
+I see, you have been signed up, you can go ahead and click on this link to, continue without a password
+
+{{ link }} Click here
+
+Regards,
+
+The admin

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{{ article.title }}
+{% endblock %}
+
+{% block nav_bar %}
+{% if user_is_authenticated %}
+<a class="btn btn-warning" href="{{ url_for('create_article.create_article') }}">Create article</a>
+<a class="p-2 text-dark" href="{{ url_for('profile.logout')}}">Log out</a>
+{% else %}
+{{ super() }}
+{% endif %}
+{% endblock nav_bar %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.intro }}</p>
+    <div class="alert alert-info">
+        <p>{{ article.text }}</p>
+    </div>
+    <p class="p-2"><b>Author</b> <i>{{ article.author }}</i></p>
+    <p class="p-2"><b>Date {{ article.date.date() }}</b></p>
+    {% if user_is_authenticated %}
+    <div class="d-md-flex justify-content-md-end">
+        <a href="/posts/{{ article.id }}/update" class="btn btn-primary">Edit</a>
+        <a href="/posts/{{ article.id }}/delete" class="btn btn-danger">Delete</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

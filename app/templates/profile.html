@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Profile page
+{% endblock %}
+
+{% block nav_bar %}
+<a class="btn btn-warning" href="{{ url_for('create_article.create_article') }}">Create article</a>
+<a class="p-2 text-dark" href="{{ url_for('profile.logout')}}">Log out</a>
+{% endblock nav_bar %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+    <div class="col-md-4 offset-md-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="alert {{ category }} col-md-12" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+    </div>
+    <h2>Welcome, {{ username }}</h2>
+    <p>You hit the magic link {{ count }} times </p>
+</div>
+
+{% endblock content %}

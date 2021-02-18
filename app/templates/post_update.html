@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Update {{ article.title }}
+{% endblock %}
+
+{% block nav_bar %}
+<a class="btn btn-warning" href="{{ url_for('create_article.create_article') }}">Create article</a>
+<a class="p-2 text-dark" href="{{ url_for('profile.logout')}}">Log out</a>
+{% endblock nav_bar %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="col-md-4 offset-md-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <div class="alert {{ category }} col-md-12" role="alert">{{ message }}</div>
+        {% endfor %}
+        {% endwith %}
+    </div>
+
+    <h1>Updating article</h1>
+    <form method="post">
+        <input type="text" name="title" id="title" class="form-control" value="{{ article.title }}"
+               placeholder="Enter article name"><br>
+        <textarea name="intro" id="intro" class="form-control" placeholder="Enter preview"
+                  style="overflow: hidden; overflow-wrap: break-word; resize: vertical; height: 65px;">{{ article.intro }}</textarea><br>
+        <textarea name="text" id="text" class="form-control" placeholder="Enter main text"
+                  style="overflow: hidden; overflow-wrap: break-word; resize: vertical; height: 200px;">{{ article.text }}</textarea><br>
+        <input type="submit" class="btn btn-success" value="Update">
+    </form>
+</div>
+{% endblock content %}

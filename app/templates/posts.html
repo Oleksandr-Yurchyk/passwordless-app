@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+All articles on the site
+{% endblock %}
+
+{% block nav_bar %}
+{% if user_is_authenticated %}
+<a class="btn btn-warning" href="{{ url_for('create_article.create_article') }}">Create article</a>
+<a class="p-2 text-dark" href="{{ url_for('profile.logout')}}">Log out</a>
+{% else %}
+{{ super() }}
+{% endif %}
+{% endblock nav_bar %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="col-md-4 offset-md-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <div class="alert {{ category }} col-md-12" role="alert">{{ message }}</div>
+        {% endfor %}
+        {% endwith %}
+    </div>
+
+    <h1>All articles on the site</h1>
+
+    {% if articles|length > 0 %}
+    {% for article in articles %}
+    <div class="alert alert-info">
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.intro }}</p>
+        <p><b>Author</b> <i>{{ article.author }}</i></p>
+        <p><b>Date {{ article.date.date() }}</b></p>
+        <a href="{{ url_for('posts.posts')}}/{{ article.id }}" class="btn btn-warning" role="button">Details</a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>We don`t have any articles yet</p>
+    <a class="btn btn-warning" href="{{ url_for('create_article.create_article') }}">Create article</a>
+    {% endif %}
+</div>
+{% endblock content %}

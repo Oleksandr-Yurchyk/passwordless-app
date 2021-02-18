@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home page
+{% endblock %}
+
+{% block nav_bar %}
+{% if user_is_authenticated %}
+<a class="btn btn-warning" href="{{ url_for('create_article.create_article') }}">Create article</a>
+<a class="p-2 text-dark" href="{{ url_for('profile.logout')}}">Log out</a>
+{% else %}
+{{ super() }}
+{% endif %}
+{% endblock nav_bar %}
+
+{% block content %}
+<div class="container">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Site with Articles</h1>
+        <p class="lead">This site was created as a test website to improve my Python development skills</p>
+    </div>
+</div>
+{% endblock content %}

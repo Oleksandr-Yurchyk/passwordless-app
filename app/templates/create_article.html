@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Creating an Article
+{% endblock %}
+
+{% block nav_bar %}
+<a class="btn btn-warning" href="{{ url_for('create_article.create_article') }}">Create article</a>
+<a class="p-2 text-dark" href="{{ url_for('profile.logout')}}">Log out</a>
+{% endblock nav_bar %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="col-md-4 offset-md-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <div class="alert {{ category }} col-md-12" role="alert">{{ message }}</div>
+        {% endfor %}
+        {% endwith %}
+    </div>
+
+    <h1>Add article</h1>
+    <form method="post" action="create_article">
+        <input type="text" name="title" id="title" class="form-control" placeholder="Enter article name" required><br>
+        <textarea name="intro" id="intro" class="form-control animated" placeholder="Enter preview"
+                  style="overflow: hidden; overflow-wrap: break-word; resize: vertical; height: 65px;"
+                  required></textarea><br>
+        <textarea name="text" id="text" class="form-control rounded-0" rows="20" placeholder="Enter main text"
+                  style="overflow: hidden; overflow-wrap: break-word; resize: vertical; height: 200px;"
+                  required></textarea><br>
+        <input type="submit" class="btn btn-success" value="Send">
+    </form>
+</div>
+{% endblock content %}
