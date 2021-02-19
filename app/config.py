@@ -6,7 +6,7 @@ SECRET_KEY = 'd1a4771d2f3bd4f561f68f3ad19dc004855fba3db'
 
 # DB
 LOCAL_HOST = 'http://127.0.0.1:8000'
-SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@localhost/flask_db'
+SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:olexandr3003@localhost/flask_db'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_ECHO = False
 
