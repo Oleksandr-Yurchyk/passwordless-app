@@ -1,7 +1,7 @@
 import datetime
 import secrets
 
-from flask import Blueprint, render_template, redirect, request, url_for, flash, current_app, session
+from flask import Blueprint, render_template, redirect, request, url_for, flash, session
 from flask_login import login_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -12,7 +12,6 @@ from app.emails import send_magic_link
 from app.models import User
 
 login_bp = Blueprint('login', __name__)
-config = current_app.config
 
 
 @login_manager.user_loader
@@ -73,11 +72,11 @@ def login_passwordless_page():
             try:
                 # Send message to users email
                 send_magic_link(user.email, magic_link)
+
                 # Save token and expires time in session
                 session['token'] = token
                 session['token_expires'] = datetime.datetime.utcnow() + datetime.timedelta(
                     minutes=app.config.TOKEN_TIME_EXPIRED_IN_MIN)
-
             except:
                 flash('Something went wrong while sending email', 'alert-danger')
                 return render_template('login_passwordless.html')
