@@ -7,7 +7,7 @@ Home page
 {% block nav_bar %}
 {% if user_is_authenticated %}
 <a class="btn btn-warning" href="{{ url_for('create_article.create_article') }}">Create article</a>
-<a class="p-2 text-dark" href="{{ url_for('profile.logout')}}">Log out</a>
+<a class="p-2 text-dark" href="{{ url_for('profile.profile', username=username)}}">Profile</a>
 {% else %}
 {{ super() }}
 {% endif %}

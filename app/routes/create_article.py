@@ -29,5 +29,6 @@ def create_article():
         except Exception as e:
             print(e)
             return "Oops.. an error occurred while adding article"
-
+    if current_user.is_authenticated:
+        return render_template('create_article.html', username=current_user.username)
     return render_template('create_article.html')

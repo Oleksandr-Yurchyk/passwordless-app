@@ -10,13 +10,19 @@ posts_bp = Blueprint('posts', __name__, url_prefix='/posts')
 @posts_bp.route("")
 def posts():
     articles = Article.query.order_by(Article.date.desc()).all()
-    return render_template('posts.html', articles=articles, user_is_authenticated=current_user.is_authenticated)
+    if current_user.is_authenticated:
+        return render_template('posts.html', articles=articles, user_is_authenticated=True,
+                               username=current_user.username)
+    return render_template('posts.html', articles=articles)
 
 
 @posts_bp.route("/<int:id>")
 def post_detail(id):
     article = Article.query.get(id)
-    return render_template('post_detail.html', article=article, user_is_authenticated=current_user.is_authenticated)
+    if current_user.is_authenticated:
+        return render_template('post_detail.html', article=article, user_is_authenticated=True,
+                               username=current_user.username)
+    return render_template('post_detail.html', article=article)
 
 
 @posts_bp.route("/<int:id>/delete")

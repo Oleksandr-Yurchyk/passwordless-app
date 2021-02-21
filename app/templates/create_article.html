@@ -6,7 +6,7 @@ Creating an Article
 
 {% block nav_bar %}
 <a class="btn btn-warning" href="{{ url_for('create_article.create_article') }}">Create article</a>
-<a class="p-2 text-dark" href="{{ url_for('profile.logout')}}">Log out</a>
+<a class="p-2 text-dark" href="{{ url_for('profile.profile', username=username)}}">Profile</a>
 {% endblock nav_bar %}
 
 {% block content %}
