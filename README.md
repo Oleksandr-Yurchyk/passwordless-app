@@ -5,7 +5,7 @@
 2. Run app.py ---> ```python3 wsgi.py```
 
 ### Pay attention to app/config.py
-There is two important variables:
+There are two important variables:
 
 
 ```PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)``` ------> session time equal to 30 minutes
