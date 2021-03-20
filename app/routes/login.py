@@ -33,17 +33,12 @@ def login_page():
         if user:
             if check_password_hash(user.password, password):
                 login_user(user)
-
                 return redirect(url_for('profile.profile', username=current_user.username))
             else:
                 flash('User detected, but wrong password', 'alert-danger')
         elif user_by_email:
             if check_password_hash(user_by_email.password, password):
                 login_user(user_by_email)
-
-                next_page = request.args.get('next')
-                if next_page:
-                    return redirect(next_page)
                 return redirect(url_for('profile.profile', username=current_user.username))
             else:
                 flash('User detected, but wrong password', 'alert-danger')
@@ -68,7 +63,7 @@ def login_passwordless_page():
             token = secrets.token_hex(20)
 
             # Create magic link
-            magic_link = f'{app.config.LOCAL_HOST}/login_passwordless/{token}/{user.username}'
+            magic_link = f'{app.config.HOST}/login_passwordless/{token}/{user.username}'
             try:
                 # Send message to users email
                 send_magic_link(user.email, magic_link)

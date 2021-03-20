@@ -1,11 +1,13 @@
 from datetime import timedelta
 
+from decouple import config
+
 # General
 DEBUG = True
-SECRET_KEY = 'd1a4771d2f3bd4f561f68f3ad19dc004855fba3db'
+SECRET_KEY = config('SECRET_KEY')
 
 # DB
-LOCAL_HOST = 'https://passwordless-app.herokuapp.com'
+HOST = config('LOCAL_HOST')
 SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_ECHO = False
@@ -19,8 +21,8 @@ MAIL_SERVER = 'smtp.googlemail.com'
 MAIL_PORT = 465
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
-MAIL_USERNAME = 'dmytro.gordon.test'
-MAIL_PASSWORD = 'some_test_pass'
+MAIL_USERNAME = config('MAIL_USERNAME')
+MAIL_PASSWORD = config('MAIL_PASSWORD')
 
 # administrator list
-ADMIN = ['dmytro.gordon.test@gmail.com']
+ADMIN = [config('MAIN_ADMIN')]
