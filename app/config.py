@@ -3,11 +3,11 @@ from datetime import timedelta
 from decouple import config
 
 # General
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 SECRET_KEY = config('SECRET_KEY')
 
 # DB
-HOST = config('LOCAL_HOST')
+HOST = config('PUBLIC_HOST')
 SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_ECHO = False
